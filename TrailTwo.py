@@ -6,38 +6,23 @@ class Vertex:
     def add_neighbour(self, v):
         if v not in self.neighbours:
             self.neighbours.append(v)
-            # self.neighbours.sort() Sorting not required for air travel flow
-
-
-class Graph:
-    vertices = {}
-
-    def add_vertex(self, vertex):
-        if vertex.name not in self.vertices:
-            self.vertices[vertex.name] = vertex
-            return True
-        else:
-            return False
-
-    def add_edge(self, u, v):
-        for key, value in self.vertices.items():
-            if key == u:
-                value.add_neighbour(u)
-            if key == v:
-                value.add_neighbour(v)
-            return True
-        else:
-            return False
-
-    def print_graph(self):
-        for key in sorted(list(self.vertices.keys())):
-            print(key + str(self.vertices[key].neighbours))
 
 
 def read_input(fromPath):
     with open(fromPath) as f:
         lines = f.readlines()[0]
         return lines.rsplit('=', 1)[1]
+
+
+class Graph:
+    vertices = []
+
+    def add_vertex(self, vertex):
+        if vertex.name not in self.vertices:
+            self.vertices.append(vertex)
+            return True
+        else:
+            return False
 
 
 input_flight = read_input('/Users/sraavanchevireddy/Downloads/Input.txt')
@@ -60,7 +45,6 @@ edges = ['DSM, ORD',
          'SFO, SAN',
          'SFO, DSM',
          'SAN, EYW']
-
 # Building a graph
 g = Graph()
 
@@ -83,8 +67,5 @@ g.add_vertex(Vertex('SIN'))
 g.add_vertex(Vertex('TLV'))
 g.add_vertex(Vertex('BUD'))
 
-for edge in edges:
-    edge_list = edge.rsplit(',')
-    g.add_edge(edge_list[0], edge_list[1])
-
-g.print_graph()
+for arr in g.vertices:
+    print(arr.name)
