@@ -1,11 +1,13 @@
+
 class Vertex:
     def __init__(self, n):
         self.name = n
-        self.neighbours = list()
+        self.edges = list()
 
-    def add_neighbour(self, v):
-        if v not in self.neighbours:
-            self.neighbours.append(v)
+
+class Edges:
+    def __init__(self, vertex):
+        self.destinationVertex = vertex
 
 
 def read_input(fromPath):
@@ -15,57 +17,87 @@ def read_input(fromPath):
 
 
 class Graph:
-    vertices = []
+
+    def __init__(self):
+        self.vertices = list()
 
     def add_vertex(self, vertex):
-        if vertex.name not in self.vertices:
-            self.vertices.append(vertex)
-            return True
-        else:
-            return False
+        self.vertices.append(vertex)
+
+    def add_edges(self, vertex_one, vertex_two):
+        return vertex_one.edges.append(Edges(vertex_two))  # Since graph is one directional
+
+    def print_graph(self,input_airport):
+        input_airport_vertex = list(filter(lambda vertex: vertex.name == input_airport, self.vertices))[0]
+        print(f'Airport Name is {input_airport_vertex.name}')
+        for each in self.vertices:
+            print(f'Input airport {each.name} == connections {len(each.edges)}')
+            for vertex in each.edges:
+                print(vertex.destinationVertex.name)
 
 
-input_flight = read_input('/Users/sraavanchevireddy/Downloads/Input.txt')
-edges = ['DSM, ORD',
-         'ORD, BGI',
-         'BGI, LGA',
-         'SIN, CDG',
-         'CDG, SIN',
-         'CDG, BUD',
-         'DEL, DOH',
-         'DEL, CDG',
-         'TLV, DEL',
-         'EWR, HND',
-         'HND, ICN',
-         'HND, JFK',
-         'ICN, JFK',
-         'JFK, LGA',
-         'EYW, LHR',
-         'LHR, SFO',
-         'SFO, SAN',
-         'SFO, DSM',
-         'SAN, EYW']
+
+
+        # empty_array = np.empty((0, 2), str)
+        # for each_edge in get_edges:
+        #     reader = each_edge.rsplit(',')
+        #     empty_array = np.append(empty_array, np.array([[reader[0], reader[1]]]), axis=0)
+        # print(empty_array)
+
+
+# input_flight = read_input('/Users/sraavanchevireddy/Downloads/Input.txt')
+inputFlight = "DEL"
+list_of_airports = {'BGI', 'CDG', 'DEL', 'DOH', 'DSM', 'EWR', 'EYW', 'HND', 'ICN', 'JFK', 'LGA', 'LHR', 'ORD', 'SAN',
+                    'SFO', 'SIN', 'TLV', 'BUD'}
+
+edges = [
+    "DSM,ORD",
+    "ORD,BGI",
+    'BGI,LGA',
+    'SIN,CDG',
+    'CDG,SIN',
+    'CDG,BUD',
+    'DEL,DOH',
+    'DEL,CDG',
+    'TLV,DEL',
+    'EWR,HND',
+    'HND,ICN',
+    'HND,JFK',
+    'ICN,JFK',
+    'JFK,LGA',
+    'EYW,LHR',
+    'LHR,SFO',
+    'SFO,SAN',
+    'SFO,DSM',
+    'SAN,EYW']
 # Building a graph
 g = Graph()
 
-g.add_vertex(Vertex('BGI'))
-g.add_vertex(Vertex('CDG'))
-g.add_vertex(Vertex('DEL'))
-g.add_vertex(Vertex('DOH'))
-g.add_vertex(Vertex('DSM'))
-g.add_vertex(Vertex('EWR'))
-g.add_vertex(Vertex('EYW'))
-g.add_vertex(Vertex('HND'))
-g.add_vertex(Vertex('ICN'))
-g.add_vertex(Vertex('JFK'))
-g.add_vertex(Vertex('LGA'))
-g.add_vertex(Vertex('LHR'))
-g.add_vertex(Vertex('ORD'))
-g.add_vertex(Vertex('SAN'))
-g.add_vertex(Vertex('SFO'))
-g.add_vertex(Vertex('SIN'))
-g.add_vertex(Vertex('TLV'))
-g.add_vertex(Vertex('BUD'))
 
-for arr in g.vertices:
-    print(arr.name)
+# Adding Vertices.
+for each_airport in list_of_airports:
+    g.add_vertex(Vertex(each_airport))
+
+#Matching the edges
+for each_Edge in edges:
+    reader = each_Edge.rsplit(',')
+    nodeOne = list(filter(lambda vertex: vertex.name == reader[0], g.vertices))
+    nodeTwo = list(filter(lambda vertex: vertex.name == reader[1], g.vertices))
+    starting_airport = nodeOne[0]
+    destination_airport = nodeTwo[0]
+    g.add_edges(starting_airport,destination_airport)
+
+g.print_graph(inputFlight)
+
+
+
+
+
+
+
+
+#
+# g.add_edges(edges)
+#
+# # Printing Graph
+# g.print_graph()
