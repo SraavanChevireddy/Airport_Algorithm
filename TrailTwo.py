@@ -34,23 +34,24 @@ class Graph:
             if each.edges:
                 array_of_no_connections.append(each.name)
             else: print(f'{each.name} has no connections')
+        f= open("output.txt","w+")
         print(f'Minimum Number of flights that needs to be added are {len(array_of_no_connections)}')
         print(f'Flights that need to be added are')
         for arr in array_of_no_connections:
             print(f'{input_airport_vertex.name}, {arr}')
+        f.write(f'Minimum Number of Flights that needs to be added are {len(array_of_no_connections)}\n')
+        f.readline()
+        f.write('Flights that need to be added are\n')
+        f.readline()
+        for arr in array_of_no_connections:
+            f.write(f'{input_airport_vertex.name}, {arr}\n')
+            f.readline()
+        f.close()
 
 
 
+inputFlight = read_input('./input.txt')
 
-        # empty_array = np.empty((0, 2), str)
-        # for each_edge in get_edges:
-        #     reader = each_edge.rsplit(',')
-        #     empty_array = np.append(empty_array, np.array([[reader[0], reader[1]]]), axis=0)
-        # print(empty_array)
-
-
-# input_flight = read_input('/Users/sraavanchevireddy/Downloads/Input.txt')
-inputFlight = "LGA"
 list_of_airports = {'BGI', 'CDG', 'DEL', 'DOH', 'DSM', 'EWR', 'EYW', 'HND', 'ICN', 'JFK', 'LGA', 'LHR', 'ORD', 'SAN',
                     'SFO', 'SIN', 'TLV', 'BUD'}
 
