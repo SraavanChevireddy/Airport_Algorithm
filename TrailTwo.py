@@ -20,8 +20,16 @@ returns a String of airport value that is added next to 'StatingAirport'.
 """
 def read_input(fromPath):
     with open(fromPath) as f:
-        lines = f.readlines()[0]
+        lines = f.readlines()[1]        
         return lines.rsplit('=', 1)[1]
+
+"""
+To read the list of airports from the inputPS12.txt file
+"""
+def read_list_of_airports(fromPath):
+    with open(fromPath) as f:
+        lines = f.readlines()[0].splitlines()
+        return lines[0].rsplit('=', 1)[1]        
 
 """
 Graph edge list will have the edges and vertices stored in different arrays.
@@ -57,7 +65,7 @@ class Graph:
             if each.edges: #Checking if the edge is empty for input airport
                 array_of_no_connections.append(each.name) # Appending the missing connection from input airport.
             else: print(f'{each.name} has no connections')
-        f= open("outpu56t.txt","w+")
+        f= open("outputPS12.txt","w+")
         f.write(f'Minimum Number of Flights that needs to be added are {len(array_of_no_connections)}\n') 
         f.write('Flights that need to be added are\n')
         for arr in array_of_no_connections:
@@ -67,11 +75,11 @@ class Graph:
 
 
 
-inputFlight = read_input('./input56.txt')
+inputFlight = read_input('./inputPS12.txt')
 
 # List of Airports given in problem bank
-list_of_airports = {'BGI', 'CDG', 'DEL', 'DOH', 'DSM', 'EWR', 'EYW', 'HND', 'ICN', 'JFK', 'LGA', 'LHR', 'ORD', 'SAN',
-                    'SFO', 'SIN', 'TLV', 'BUD'}
+list_of_airports = read_list_of_airports('./inputPS12.txt')
+list_of_airports = list_of_airports.split(',')
 
 # Edges that are given in the Problem Bank
 edges = [

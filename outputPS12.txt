@@ -1,17 +1,17 @@
 Minimum Number of Flights that needs to be added are 15
 Flights that need to be added are
-LGA, LHR
-LGA, TLV
+LGA, BGI
 LGA, CDG
-LGA, SAN
+LGA, DEL
+LGA, DSM
+LGA, EWR
 LGA, EYW
 LGA, HND
-LGA, BGI
-LGA, DEL
-LGA, JFK
-LGA, SFO
 LGA, ICN
+LGA, JFK
+LGA, LHR
 LGA, ORD
-LGA, DSM
+LGA, SAN
+LGA, SFO
 LGA, SIN
-LGA, EWR
+LGA, TLV
